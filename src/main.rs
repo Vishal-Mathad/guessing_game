@@ -35,7 +35,19 @@ fn main() {
         // We cannot compare string with integer so we will have to parse that into integer.
         // We have used the same variable name guess -> This is called shadowing in which we use the same variable name and this reference will be used now onwards the previous reference is removed.
         // Why did we trim it -> because when we gave an input and pressed enter the input did not just have the value we gave it also had the next line \n inside it so we need to trim so that we are able to parse the string.
-        let guess: u32 = guess.trim().parse().expect("Failed to parse !");
+        // Here we must handle the error correctly because this will crash the game instantly but we dont want that as it is a mistake in guessing
+        // let guess: u32 = guess.trim().parse().expect("Failed to parse !");
+        // Here we have handled the error if input is not an integer it will continue it will not break and a retry will be given to the user.
+        // parse() -> gives two things {ok, Err} -> ok is when everything is correct so we returned what we get 
+        // Err -> is error that occurs so we have just printed invalid type : Integer is only valid and we have continued.
+        // We have used match so that all possibilities are taken into consideration as we are bound to do that as well.
+        let guess:u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => {
+                println!("Integers are only valid input !");
+                continue;
+            },
+        };
 
         // cmp -> comparsion operator hai which compares the two values
         // match is basically switch case kind of -> It strictly tells to handle all the possible scenarios. for eg we are comparing two numbers -> possible sceanrios are either it is greater or smaller and it can be equal so we need to handle all 3 scenarios.
