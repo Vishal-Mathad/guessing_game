@@ -44,7 +44,7 @@ fn main() {
         let guess:u32 = match guess.trim().parse() {
             Ok(num) => num,
             Err(_) => {
-                println!("Integers are only valid input !");
+                println!("Invalid Type : Integer only !");
                 continue;
             },
         };
